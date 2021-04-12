@@ -15,6 +15,8 @@ use \Validator;
 use DB;
 use App\Devicetoken;
 use Route;
+use App\Rules\MatchOldPassword;
+
 class UsersApiController extends Controller
 {
 
@@ -257,17 +259,20 @@ class UsersApiController extends Controller
         $user = Auth::guard('api')->user();
 
         $validator = Validator::make($request->all(), [
-            'password' => 'required|confirmed|min:8',
-        ]);
+            'current_password' => ['required', new MatchOldPassword],
+            'new_password' => ['required'],
+            'new_confirm_password' => ['same:new_password'],        ]);
 
 
         if ($validator->fails()) {
             $message = getFirstMessageError($validator);
             return jsonResponse(false, $message, null, 111, null, null, $validator);
         }
+        $changePassword= User::find($user->id)->update(['password'=>bcrypt($request->password)]);
 
-        $user->password = bcrypt($request->password);
 
+        $message = __('api.success');
+        return jsonResponse(true, $message, $changePassword, 200);
 
     }
 
