@@ -62,6 +62,14 @@ class User extends Authenticatable
         $this->attributes['email_verified_at'] = $value ? Carbon::createFromFormat(config('panel.date_format') . ' ' . config('panel.time_format'), $value)->format('Y-m-d H:i:s') : null;
     }
 
+    public function findForPassport($username)
+    {
+        // dd($username );
+        $user = $this->where('phone', $username)->first();
+
+        return $user;
+    }
+
     public function setPasswordAttribute($input)
     {
         if ($input) {
@@ -73,9 +81,9 @@ class User extends Authenticatable
     {
         $this->notify(new ResetPassword($token));
     }
-
     public function roles()
     {
         return $this->belongsToMany(Role::class);
     }
+
 }
