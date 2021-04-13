@@ -20,6 +20,13 @@ Route::get('/migrate', function () {
     return redirect('/');
 });
 
+Route::get('setLang/{lang}', function($lang){
+
+    session(['language' => $lang]);
+    App::setLocale($lang);
+    return Redirect::back();
+});
+
 Route::get('/clear-cache', function() {
     Artisan::call('cache:clear');
     Artisan::call('route:clear');
