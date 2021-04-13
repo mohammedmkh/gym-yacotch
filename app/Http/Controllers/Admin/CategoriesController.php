@@ -114,7 +114,7 @@ class CategoriesController extends Controller
        }
 
 
-
+        alertSuccessAdd();
         return redirect()->route('admin.categories.index');
     }
 
@@ -163,7 +163,7 @@ class CategoriesController extends Controller
 
 
 
-
+        alertSuccessUpdate();
         return redirect()->route('admin.categories.index');
     }
 

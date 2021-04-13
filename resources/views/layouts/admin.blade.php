@@ -47,7 +47,28 @@
                 font-family: 'Cairo', sans-serif;
             }
 
+            #toast-container{
+                float: left!important;
+                left:15px!important;
+                right:inherit!important;
+                top:60px!important;
+            }
+            #toast-container>.toast-success {
+              background-position: left!important;
+                padding-left: 20px!important;
+
+            }
+
         </style>
+
+        <div id="toast-container" class="toast-top-right">
+            <div class="toast toast-success" aria-live="polite" style="">
+                <div class="toast-progress" style="width: 48.79%;"></div>
+                <button class="toast-close-button" role="button">
+                    <i class="icon-off"></i></button><div class="toast-title"> نجاح الاجراء </div>
+                <div class="toast-message"> تمت عملية التعديل بنجاح </div>
+            </div>
+        </div>
 
     @endif
 
