@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 use \Validator;
 use DB;
-use App\Devicetoken;
+use App\Models\Devicetoken;
 use Route;
 use App\Rules\MatchOldPassword;
 

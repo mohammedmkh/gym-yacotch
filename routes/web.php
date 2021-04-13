@@ -7,7 +7,7 @@ Route::get('/migrate', function () {
         Artisan::call('krlove:generate:model Devicetoken --table-name=devicetoken');
         Artisan::call('krlove:generate:model LanguageDescription --table-name=language_description');
         Artisan::call('krlove:generate:model LanguageTables --table-name=table_languages');
-        Artisan::call('krlove:generate:model Supplier --table-name=suppliers');
+        Artisan::call('krlove:generate:model captinCategorie --table-name=captin_categories');
         Artisan::call('krlove:generate:model Service --table-name=services');
         Artisan::call('krlove:generate:model Service --table-name=services');
         Artisan::call('krlove:generate:model Country --table-name=countries');
