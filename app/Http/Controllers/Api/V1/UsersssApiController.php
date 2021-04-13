@@ -32,7 +32,7 @@ use App\Notifications;
 
 use Illuminate\Database\Eloquent\Builder;
 
-class UsersApiController extends Controller
+class UsersssApiController extends Controller
 {
 
 

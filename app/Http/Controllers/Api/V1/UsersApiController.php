@@ -411,4 +411,15 @@ class UsersApiController extends Controller
 
     }
 
+    public function logout(Request $request){
+
+        $user = Auth::guard('api')->user() ;
+        if($user) {
+            $divecs_revoke = Devicetoken::where('user_id', $user->id)->delete();
+            $revoke = $user->token()->revoke();
+        }
+
+        return jsonResponse( true  , __('api.success') , null,200 );
+
+    }
 }

@@ -16,6 +16,12 @@ class CreateUsersTable extends Migration
             $table->string('password')->nullable();
             $table->string('remember_token')->nullable();
             $table->string('phone')->nullable();
+            $table->string('sms_code');
+            $table->unsignedBigInteger('role')->nullable();
+            $table->foreign('role', 'user_fk_3643296')->references('id')->on('roles');
+
+            $table->tinyInteger('verify')->default(0);
+            $table->tinyInteger('is_reset')->default(0);
             $table->timestamps();
             $table->softDeletes();
         });

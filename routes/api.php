@@ -18,6 +18,7 @@ Route::group(['prefix' => 'v1', 'as' => 'api.', 'namespace' => 'Api\V1', 'middle
     Route::get('myInfo', 'UsersApiController@myInfo');
     Route::post('updateProfile', 'UsersApiController@updateProfile');
     Route::post('updatePassword', 'UsersApiController@updatePassword');
+    Route::get('logout', 'UsersApiController@logout');
 
 
 });
