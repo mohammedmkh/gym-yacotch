@@ -71,7 +71,65 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     // Categories Trans
     Route::delete('categories-trans/destroy', 'CategoriesTransController@massDestroy')->name('categories-trans.massDestroy');
     Route::resource('categories-trans', 'CategoriesTransController');
+
+    // Advertices
+    Route::delete('advertices/destroy', 'AdverticeController@massDestroy')->name('advertices.massDestroy');
+    Route::resource('advertices', 'AdverticeController');
+
+    // Translations
+    Route::delete('translations/destroy', 'TranslationsController@massDestroy')->name('translations.massDestroy');
+    Route::resource('translations', 'TranslationsController');
+
+    // Plans
+    Route::delete('plans/destroy', 'PlansController@massDestroy')->name('plans.massDestroy');
+    Route::resource('plans', 'PlansController');
+
+    // Captins
+    Route::delete('captins/destroy', 'CaptinsController@massDestroy')->name('captins.massDestroy');
+    Route::resource('captins', 'CaptinsController');
+
+    // Images
+    Route::delete('images/destroy', 'ImagesController@massDestroy')->name('images.massDestroy');
+    Route::resource('images', 'ImagesController');
+
+    // Reviews Clinets
+    Route::delete('reviews-clinets/destroy', 'ReviewsClinetsController@massDestroy')->name('reviews-clinets.massDestroy');
+    Route::resource('reviews-clinets', 'ReviewsClinetsController');
+
+    // Reviews Captins
+    Route::delete('reviews-captins/destroy', 'ReviewsCaptinController@massDestroy')->name('reviews-captins.massDestroy');
+    Route::resource('reviews-captins', 'ReviewsCaptinController');
+
+    // Captin Certificates
+    Route::delete('captin-certificates/destroy', 'CaptinCertificateController@massDestroy')->name('captin-certificates.massDestroy');
+    Route::resource('captin-certificates', 'CaptinCertificateController');
+
+    // Courses
+    Route::delete('courses/destroy', 'CoursesController@massDestroy')->name('courses.massDestroy');
+    Route::resource('courses', 'CoursesController');
+
+    // Trainee Courses
+    Route::delete('trainee-courses/destroy', 'TraineeCourseController@massDestroy')->name('trainee-courses.massDestroy');
+    Route::resource('trainee-courses', 'TraineeCourseController');
+
+    // Trainee Inforamations
+    Route::delete('trainee-inforamations/destroy', 'TraineeInforamationController@massDestroy')->name('trainee-inforamations.massDestroy');
+    Route::resource('trainee-inforamations', 'TraineeInforamationController');
+
+    // Settings
+    Route::delete('settings/destroy', 'SettingsController@massDestroy')->name('settings.massDestroy');
+    Route::resource('settings', 'SettingsController');
+
+    // Reportoncaptins
+    Route::delete('reportoncaptins/destroy', 'ReportoncaptinsController@massDestroy')->name('reportoncaptins.massDestroy');
+    Route::resource('reportoncaptins', 'ReportoncaptinsController');
+
+    // Report Ontrainees
+    Route::delete('report-ontrainees/destroy', 'ReportOntraineeController@massDestroy')->name('report-ontrainees.massDestroy');
+    Route::resource('report-ontrainees', 'ReportOntraineeController');
 });
+
+
 Route::group(['prefix' => 'profile', 'as' => 'profile.', 'namespace' => 'Auth', 'middleware' => ['auth']], function () {
 // Change password
     if (file_exists(app_path('Http/Controllers/Auth/ChangePasswordController.php'))) {
