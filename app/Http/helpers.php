@@ -6,6 +6,38 @@ use App\User;
 use Illuminate\Support\Facades\Cache;
 
 
+function  alertSuccessUpdate($message = null , $title = null){
+
+
+    if(session()->get('language') == 'en'){
+        $message = ' The Editing Item Success Updating ' ;
+        $title = 'Success Update ' ;
+        toastr()->success( $message ,  $title , ['timeOut' => 445000]);
+    }else{
+        $message = ' تمت عملية التعديل بنجاح ' ;
+        $title = ' نجاح الاجراء ' ;
+        toastr()->success( $message ,  $title , ['timeOut' => 445000]);
+    }
+
+
+}
+
+function  alertSuccessAdd($message = null , $title = null){
+
+
+    if(session()->get('language') == 'en'){
+        $message = ' The Add Item Success created ' ;
+        $title = 'Success Add ' ;
+        toastr()->success( $message,  $title , ['timeOut' => 5000]);
+    }else{
+        $message = ' تمت عملية الاضافة بنجاح ' ;
+        $title = ' نجاح الاجراء ' ;
+        toastr()->success( $message ,    $title , ['timeOut' => 5000]);
+    }
+
+
+}
+
 function adminPath(){
     return 'panel/';
 }

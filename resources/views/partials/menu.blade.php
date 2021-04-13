@@ -16,12 +16,7 @@
             <!--begin::Menu Nav-->
             <ul class="menu-nav">
 
-                <li class="menu-item menu-item-active" aria-haspopup="true">
-                    <a href="index.html" class="menu-link">
-                        <i class="menu-icon flaticon2-architecture-and-city"></i>
-                        <span class="menu-text">Export</span>
-                    </a>
-                </li>
+
 
 
 
