@@ -2,17 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b8efc775-64ec-43be-bf39-067f50b23499" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/Admin/CategoriesController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/Admin/CategoriesController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/helpers.php" afterPath="$PROJECT_DIR$/app/Http/helpers.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Models/Category.php" afterPath="$PROJECT_DIR$/app/Models/Category.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/index.php" afterPath="$PROJECT_DIR$/public/index.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/admin/categories/create.blade.php" afterPath="$PROJECT_DIR$/resources/views/admin/categories/create.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/admin/categories/edit.blade.php" afterPath="$PROJECT_DIR$/resources/views/admin/categories/edit.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/admin/roles/create.blade.php" afterPath="$PROJECT_DIR$/resources/views/admin/roles/create.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/layouts/admin.blade.php" afterPath="$PROJECT_DIR$/resources/views/layouts/admin.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/partials/datatablesActions.blade.php" afterPath="$PROJECT_DIR$/resources/views/partials/datatablesActions.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/partials/headermenu.blade.php" afterPath="$PROJECT_DIR$/resources/views/partials/headermenu.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/Api/V1/UsersApiController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/Api/V1/UsersApiController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Models/User.php" afterPath="$PROJECT_DIR$/app/Models/User.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Rules/MatchOldPassword.php" afterPath="$PROJECT_DIR$/app/Rules/MatchOldPassword.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/routes/api.php" afterPath="$PROJECT_DIR$/routes/api.php" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -86,11 +81,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="create.blade.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="create.blade.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/resources/views/admin/roles/create.blade.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="178">
               <caret line="27" column="154" lean-forward="false" selection-start-line="27" selection-start-column="146" selection-end-line="27" selection-end-column="154" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name=".gitignore" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/.gitignore">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="180">
+              <caret line="12" column="0" lean-forward="false" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -111,16 +116,6 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="141">
               <caret line="212" column="19" lean-forward="false" selection-start-line="212" selection-start-column="9" selection-end-line="212" selection-end-column="19" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="index.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/public/index.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="570">
-              <caret line="43" column="18" lean-forward="false" selection-start-line="43" selection-start-column="11" selection-end-line="43" selection-end-column="18" />
               <folding />
             </state>
           </provider>
@@ -197,6 +192,7 @@
         <option value="$PROJECT_DIR$/resources/views/partials/datatablesActions.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/layouts/admin.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/admin/roles/create.blade.php" />
+        <option value="$PROJECT_DIR$/.gitignore" />
       </list>
     </option>
   </component>
@@ -210,10 +206,10 @@
   </component>
   <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" />
   <component name="ProjectFrameBounds">
-    <option name="x" value="-162" />
+    <option name="x" value="200" />
     <option name="y" value="23" />
     <option name="width" value="1280" />
-    <option name="height" value="738" />
+    <option name="height" value="737" />
   </component>
   <component name="ProjectView">
     <navigator currentView="ProjectPane" proportions="" version="1">
@@ -240,86 +236,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="gym-yacotch" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="gym-yacotch" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="gym-yacotch" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="resources" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="views" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="gym-yacotch" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="gym-yacotch" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="resources" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="views" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="admin" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="gym-yacotch" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="gym-yacotch" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="resources" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="views" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="admin" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="roles" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="gym-yacotch" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="gym-yacotch" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="resources" />
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
           </PATH>
@@ -434,16 +350,15 @@
       <workItem from="1618172127228" duration="1513000" />
       <workItem from="1618214106738" duration="66000" />
       <workItem from="1618214190362" duration="958000" />
-      <workItem from="1618231167892" duration="9541000" />
+      <workItem from="1618231167892" duration="10069000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="37557000" />
+    <option name="totallyTimeSpent" value="38085000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-162" y="23" width="1280" height="738" extended-state="0" />
-    <editor active="true" />
+    <frame x="200" y="23" width="1280" height="737" extended-state="0" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2180937" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -454,7 +369,7 @@
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="npm" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.33436534" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.33488372" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -476,7 +391,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/../metronic_v7.2.5/theme/html/demo12/dist/crud/datatables/data-sources/ajax-server-side.html" />
     <entry file="file://$PROJECT_DIR$/.env">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="165">
@@ -648,7 +562,7 @@
         <state relative-caret-position="292">
           <caret line="261" column="58" lean-forward="true" selection-start-line="261" selection-start-column="58" selection-end-line="261" selection-end-column="58" />
           <folding>
-            <marker date="1618233368661" expanded="true" signature="7811:7822" ph="{...}" />
+            <marker date="1618310822338" expanded="true" signature="12038:12041" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -822,6 +736,14 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="178">
           <caret line="27" column="154" lean-forward="false" selection-start-line="27" selection-start-column="146" selection-end-line="27" selection-end-column="154" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="12" column="0" lean-forward="false" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
           <folding />
         </state>
       </provider>

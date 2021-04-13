@@ -3,19 +3,11 @@
 namespace App\Rules;
 
 use Illuminate\Contracts\Validation\Rule;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class MatchOldPassword implements Rule
 {
-    /**
-     * Create a new rule instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        //
-    }
-
     /**
      * Determine if the validation rule passes.
      *
@@ -25,7 +17,7 @@ class MatchOldPassword implements Rule
      */
     public function passes($attribute, $value)
     {
-        //
+        return Hash::check($value, Auth::guard('api')->user()->password);
     }
 
     /**
@@ -35,6 +27,6 @@ class MatchOldPassword implements Rule
      */
     public function message()
     {
-        return 'The validation error message.';
+        return 'The :attribute is match with old password.';
     }
 }

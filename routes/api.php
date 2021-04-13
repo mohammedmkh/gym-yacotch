@@ -7,6 +7,9 @@ Route::group(['prefix' => 'v1', 'as' => 'api.', 'namespace' => 'Api\V1'], functi
     Route::post('signPhoneTranee', 'UsersApiController@signPhoneTranee');
     Route::post('registerTranee', 'UsersApiController@registerTranee');
     Route::post('validationCode', 'UsersApiController@validationCode');
+    Route::post('validationCodeResetPasswordTranee', 'UsersApiController@validationCodeResetPasswordTranee');
+    Route::post('checkPhoneResetPasswordTranee', 'UsersApiController@checkPhoneResetPasswordTranee');
+    Route::post('resetPasswordTranee', 'UsersApiController@resetPasswordTranee');
 
 });
 
