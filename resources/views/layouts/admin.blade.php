@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 
-<html lang="en">
+<html   @if(session()->get('language') != 'en') direction="rtl" dir="rtl" style="direction: rtl" @else lang="en" @endif>
 <!--begin::Head-->
 <head><base href="">
     <meta charset="utf-8" />
@@ -27,7 +27,6 @@
         <link href="{{url('assets/plugins/custom/prismjs/prismjs.bundle.css')}}" rel="stylesheet" type="text/css" />
         <link href="{{url('assets/css/style.bundle.css')}}" rel="stylesheet" type="text/css" />
         <link href="{{url('assets/plugins/custom/datatables/datatables.bundle.css')}}" rel="stylesheet" type="text/css" />
-
 
     @else
 
@@ -192,11 +191,21 @@
 <script src="{{url('assets/plugins/custom/datatables/datatables.bundle.js')}}"></script>
 
 
+<script src="{{url('assets/js/pages/features/miscellaneous/sweetalert2.js')}}"></script>
+
+<script src="{{url('assets/js/pages/crud/forms/widgets/select2.js?v=7.2.6')}}"></script>
 
 
 <script>
 
 
+
+
+
+
+    $(".kt_sweetalert_demo_3_1").click(function(e) {
+        Swal.fire("Good job!");
+    });
 
 
 
@@ -299,16 +308,18 @@
         var error = 0;
         var msg = 'An Error Has Occured.\n\nRequired Fields missed are :\n';
         $(':input[required]').each(function(){
-            $(this).addClass('is-invalid');
+
             if($(this).attr('type') == 'file'){
-                $(this).attr('placeholder', 'Placeholder text');
-                $(this).close('label').attr('border','19px solid rgb(202, 209, 215)');
+                //$(this).attr('placeholder', 'Placeholder text');
+                //$(this).close('label').attr('border','19px solid rgb(202, 209, 215)');
             }
 
 
             if($(this).val() == ''){
                 msg += '\n' + $(this).attr('id') + ' Is A Required Field..';
-                $(this).css('border','1px solid red');
+             //   $(this).css('border','1px solid red');
+              //  $(this).addClass('is-invalid');
+
                 if(error == 0){
                     $(this).focus();
                 }
@@ -319,15 +330,60 @@
 
         if(error == 1){
             var id =  $('.tab-pane').find(':required:invalid').closest('.tab-pane').attr('id');
-
-            // Find the link that corresponds to the pane and have it show
-            console.log('the id is' + id);
             $('.nav a[href="#' + id + '"]').tab('show');
-
-            // Only want to do it once
             return false;
         }
     });
+
+
+    @if(session()->get('language') == 'en')
+    function deleteBtn(){
+
+        var form = $(this).parents('form');
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to restore this!",
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.value) {
+
+            form.submit();
+        }
+    });
+
+    }
+    @else
+    function deleteBtn(id){
+
+        var form = $('form[name="formdelete'+id+'"]');
+        Swal.fire({
+            title: 'هل أنت متأكد ؟',
+            text: "لا يمكنك استعادة العنصر المحذوف ",
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'احذف',
+            cancelButtonText: 'الغاء',
+        }).then((result) => {
+            if (result.value) {
+
+            form.submit();
+        }
+    });
+
+    }
+
+    @endif
+
+
+
+
+
 </script>
 
 </body>

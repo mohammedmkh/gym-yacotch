@@ -213,8 +213,8 @@ function sendFCM($title, $body, $data, $tokens, $badge)
 function removeFile($path)
 {
 
-    if(file_exists(public_path($path))){
-        unlink(public_path($path));
+    if(file_exists($path)){
+        unlink($path);
     };
 
 }
@@ -237,29 +237,32 @@ function uploadDocument($file)
 }
 
 
-function uploadFile($file, $width=300, $dest=null)
+function uploadFile($file, $width=500, $dest=null)
 {
 
 
     $name = time() . Str::random(4). '.' . $file->getClientOriginalExtension();
-
+    $name = $name ;
     if($dest == null) {
-        $dest = public_path('images/upload/');
-    }
-    $destinationPath = $dest ;
-    $file->move($destinationPath, $name);
+        $dest = 'images/upload';
+    };
+    $final = $dest.'/'.$name;
+    $file->move( $dest, $name);
 
 
-
+    /*
     $image_new = Image::make(public_path('images/upload/').'/'.$name) ;
     $image_new->resize($width, null, function ($constraint) {
         $constraint->aspectRatio();
     });
     $image_new ->save();
+    */
+
+    //dd($name2);
 
 
 
-    return $name;
+    return   $final;
 }
 
 

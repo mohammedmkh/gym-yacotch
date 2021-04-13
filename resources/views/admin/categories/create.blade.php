@@ -11,6 +11,21 @@
             @csrf
 
 
+            @if ($errors->has('image'))
+                <div class="alert alert-custom alert-outline-2x alert-outline-danger fade show mb-5" role="alert">
+                    <div class="alert-icon">
+                        <i class="flaticon-warning"></i>
+                    </div>
+                    <div class="alert-text">{{$errors->first('image')}}</div>
+                    <div class="alert-close">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+																	<span aria-hidden="true">
+																		<i class="ki ki-close"></i>
+																	</span>
+                        </button>
+                    </div>
+                </div>
+            @endif
 
             <div class="row">
                 <div class="col-3" >
@@ -56,15 +71,17 @@
             </div>
 
             <div class="form-group">
-                <label for="image">{{ trans('cruds.category.fields.image') }}</label>
-                <input class="form-control {{ $errors->has('image') ? 'is-invalid' : '' }}" type="text" name="image" id="image" value="{{ old('image', '') }}">
-                @if($errors->has('image'))
-
-                    <div class="fv-plugins-message-container">
-                        <div data-field="image" data-validator="notEmpty" class="fv-help-block"> {{ $errors->first('image') }}</div>
-                    </div>
-                @endif
-                <span class="help-block">{{ trans('cruds.category.fields.image_helper') }}</span>
+                <div class="image-input image-input-outline" id="kt_image_1">
+                    <div class="image-input-wrapper" style="background-image: url({{url('assets/media/image_large.png')}})"></div>
+                    <label class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="change" data-toggle="tooltip" title="" data-original-title="Change avatar">
+                        <i class="fa fa-pen icon-sm text-muted"></i>
+                        <input type="file" name="image" accept=".png, .jpg, .jpeg" />
+                        <input type="hidden" name="image_remove" />
+                    </label>
+                    <span class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="cancel" data-toggle="tooltip" title="Cancel avatar">
+															<i class="ki ki-bold-close icon-xs text-muted"></i>
+														</span>
+                </div>
             </div>
             <div class="form-group">
                 <button class="btn btn-danger" type="submit" id="submitButton">
@@ -81,7 +98,7 @@
 
 
 @section('scripts')
-
+    <script src="{{url('assets/js/pages/crud/file-upload/image-input.js')}}"></script>
     <script>
 
 

@@ -32,7 +32,18 @@ class Category extends Model
     }
 
 
-    protected $appends = ['name'] ;
+    protected $appends = ['name' , 'image_url'] ;
+
+
+    public function getImageUrlAttribute(){
+
+
+        if($this->image != ''){
+            return url('/').'/'.$this->image;
+        }
+
+        return url('assets/media/image_large.png');
+    }
 
     public function getNameAttribute(){
 

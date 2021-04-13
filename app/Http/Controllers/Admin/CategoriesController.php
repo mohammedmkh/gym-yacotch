@@ -51,10 +51,10 @@ class CategoriesController extends Controller
                 return $row->name ? $row->name : "";
             });
             $table->editColumn('image', function ($row) {
-                return $row->image ? $row->image : "";
+                return  "<img src='".$row->image_url."' height='100'>";
             });
 
-            $table->rawColumns(['actions', 'placeholder']);
+            $table->rawColumns(['actions', 'placeholder' ,'image']);
 
             return $table->make(true);
         }
@@ -72,6 +72,8 @@ class CategoriesController extends Controller
     public function store(Request $request)
     {
 
+        $data = $request->all();
+
         $validator = Validator::make($request->all(),
             [
                 'name.*' => 'bail|required',
@@ -81,9 +83,24 @@ class CategoriesController extends Controller
         $validator->validate();
 
 
-        $data = $request->all();
+        if ($request->hasFile('image')) {
+
+            $validator = Validator::make($request->all(),
+                [
+                    'image' => 'max:2000',
+                ]
+            );
+            $validator->validate();
+
+            $image = $request->file('image');
+            $name_image =  uploadFile($image );
+            $data['image'] =  $name_image;
+
+        }
+
+
         $category = new Category();
-        $category->image = $request->image ;
+        $category->image = $data['image'] ;
         $category->save();
 
 
@@ -110,11 +127,29 @@ class CategoriesController extends Controller
 
     public function update(Request $request, Category $category)
     {
-        $category->update($request->all());
+
+        if ($request->hasFile('image')) {
+
+            $validator = Validator::make($request->all(),
+                [
+                    'image' => 'max:2000',
+                ]
+            );
+            $validator->validate();
+
+            $image = $request->file('image');
+            $name_image =  uploadFile($image );
+            //delete old image from category
+            if($name_image != ''){
+                removeFile($category->image);
+                $category->update(['image' =>  $name_image ]);
+            }
+
+
+        }
+
          $category->translation()->delete();
 
-
-      //  dd($request->name);
 
         foreach ($request->name as $key=>$name){
             $trans = new Translation();
@@ -124,6 +159,9 @@ class CategoriesController extends Controller
             $trans->save();
             $category->translation()->save($trans);
         }
+
+
+
 
 
         return redirect()->route('admin.categories.index');
@@ -139,7 +177,7 @@ class CategoriesController extends Controller
     public function destroy(Category $category)
     {
         abort_if(Gate::denies('category_delete'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-
+        removeFile($category->image);
         $category->delete();
 
         return back();
