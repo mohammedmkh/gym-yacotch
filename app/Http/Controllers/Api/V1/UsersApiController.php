@@ -2,11 +2,20 @@
 
 namespace App\Http\Controllers\Api\V1;
 
+use App\CaptinPlan;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\Http\Resources\Admin\UserResource;
+use App\Models\Captin;
+use App\Models\CaptinCertificate;
+use App\Models\Category;
+use App\Models\Course;
+use App\Models\Plan;
 use App\Models\User;
+use App\Models\CaptinVideo;
+
+use App\UserEvaluation;
 use Gate;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -16,6 +25,7 @@ use DB;
 use App\Models\Devicetoken;
 use Route;
 use App\Rules\MatchOldPassword;
+use App\Models\ReviewsCaptin;
 
 class UsersApiController extends Controller
 {
@@ -196,7 +206,7 @@ class UsersApiController extends Controller
 
     }
 
-    public function loginTranee(Request $request)
+    public function login(Request $request)
     {
 
         $validator = Validator::make($request->all(), [
@@ -247,7 +257,6 @@ class UsersApiController extends Controller
             $response = Route::dispatch($tokenRequest);
             $json = (array)json_decode($response->getContent());
 
-
             if (isset($json['error'])) {
                 $message = __('api.wrong_login');
                 return jsonResponse(false, $message, null, 109);
@@ -284,8 +293,9 @@ class UsersApiController extends Controller
         $user = Auth::guard('api')->user();
 
         $validator = Validator::make($request->all(), [
+            'name' => 'unique:users,name,' . $user->name . ',name',
             'phone' => 'numeric|unique:users,phone,' . $user->id . ',id',
-            'email' => 'unique:users,email,' . $user->id . ',id',
+            'address' => 'required',
         ]);
 
 
@@ -300,6 +310,9 @@ class UsersApiController extends Controller
         }
         if ($request->name) {
             $user->name = $request->name;
+        }
+        if ($request->address) {
+            $user->address = $request->address;
         }
 
 
@@ -411,15 +424,275 @@ class UsersApiController extends Controller
 
     }
 
-    public function logout(Request $request){
+    public function logout(Request $request)
+    {
 
-        $user = Auth::guard('api')->user() ;
-        if($user) {
+        $user = Auth::guard('api')->user();
+        if ($user) {
             $divecs_revoke = Devicetoken::where('user_id', $user->id)->delete();
             $revoke = $user->token()->revoke();
         }
 
-        return jsonResponse( true  , __('api.success') , null,200 );
+        return jsonResponse(true, __('api.success'), null, 200);
 
     }
+
+    public function getCaptin(Request $request)
+    {
+
+
+        $collection = User::with('categories:id,name')->where('role', 3)->paginate(10);
+        /*        $avilableTechnical = DB::select("
+        SELECT users.id ,
+        users.name ,
+        categories.name ,
+        users.lang ,
+        users.distance,
+        AVG(user_evaluations.evaluation_no) as evaluation,
+
+        LEFT JOIN  categories ON categories.user_id = users.id
+                  LEFT JOIN  user_evaluations ON user_evaluations.evaluated_user_id = users.id
+
+        GROUP BY users.id
+        ");*/
+
+
+        $message = __('api.success');
+        return jsonResponse(true, $message, $collection, 200);
+    }
+
+    public function getLastCaptin(Request $request)
+    {
+
+
+        $collection = User::with('categories:id,name')->where('role', 3)->orderBy('id', 'desc')->take(10)->get();
+
+
+        $message = __('api.success');
+        return jsonResponse(true, $message, $collection, 200);
+    }
+
+    public function setCaptinEvaluation(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'captin_id' => 'required|numeric',
+            'user_id' => 'required|numeric',
+            'note' => 'required',
+            'review' => 'required|numeric|max:5',
+        ]);
+        if ($validator->fails()) {
+            $message = getFirstMessageError($validator);
+            return jsonResponse(false, $message, null, 111, null, null, $validator);
+        }
+        $data = ReviewsCaptin::Create($request->all());
+        $message = __('api.success');
+        return jsonResponse(true, $message, $data, 200);
+    }
+
+    public function getCaptinEvaluation(Request $request)
+    {
+
+        $data = ReviewsCaptin::with('user:id,name')->where('captin_id', $request->id)->paginate(15);
+        $message = __('api.success');
+        return jsonResponse(true, $message, $data, 200);
+    }
+
+
+    public function getCategories(Request $request)
+    {
+
+
+        $collection = Category::paginate();
+
+
+        $collection->all();
+
+        $message = __('api.success');
+        return jsonResponse(true, $message, $collection, 200);
+    }
+
+    public function getPlans(Request $request)
+    {
+
+
+        $collection = Plan::paginate();
+
+
+        $collection->all();
+
+        $message = __('api.success');
+        return jsonResponse(true, $message, $collection, 200);
+    }
+
+    public function uploadImage(Request $request)
+    {
+        if ($request->file) {
+
+            $data = [];
+            foreach ($request->file as $file) {
+                $file_name = uploadFile($file, 300, 'images/upload/');
+                $link = 'images/upload/' . $file_name;
+
+                $items['file'] = url('/') . '/' . $link;
+                $items['path'] = $link;
+
+                $data[] = (object)$items;
+            }
+
+            return jsonResponse(true, __('api.success'), $data, 200);
+        }
+
+        $message = __('api.file_has_error');
+        return jsonResponse(false, $message, null, 130);
+    }
+
+    public function getCaptinDetails(Request $request)
+    {
+        $collection = Captin::with('user:id,name')->paginate();
+
+
+        $collection->all();
+
+        $message = __('api.success');
+        return jsonResponse(true, $message, $collection, 200);
+    }
+
+    public function getCaptinvideos(Request $request)
+    {
+
+        $data = CaptinVideo::with('user:id,name')->where('user_id', $request->id)->paginate(15);
+        $message = __('api.success');
+        return jsonResponse(true, $message, $data, 200);
+    }
+
+    public function getCaptinCource(Request $request)
+    {
+
+        $data = Course::with('captin:id,name')->where('captin_id', $request->id)->paginate(15);
+        $message = __('api.success');
+        return jsonResponse(true, $message, $data, 200);
+    }
+
+    public function registerCaptin(Request $request)
+    {
+
+        $validator = Validator::make($request->all(), [
+            'phone' => 'required|numeric|digits:10',
+            'name' => 'required',
+            'password' => 'required|min:6',
+            'category_id' => 'required',
+            'plans' => 'required',
+            'cv' => 'required',
+            'captin_certificates' => 'required',
+            'identify' => 'required',
+            'hours_cost' => 'required',
+
+        ]);
+
+
+        if ($validator->fails()) {
+            $message = getFirstMessageError($validator);
+            return jsonResponse(false, $message, null, 111, null, null, $validator);
+        }
+
+
+        $user = User::where('phone', $request->phone)->first();
+
+        // check Oauth Credentials
+        $cred = DB::table('oauth_clients')->where('name', $request->client_id)
+            ->where('secret', $request->client_secret)->first();
+        if (!$cred) {
+            $message_error = __('api.cred_not_found');
+            return jsonResponse(false, $message_error, null, 100);
+        }
+
+
+        if ($user) {
+            $message_error = __('api.user_exist_before');
+            return jsonResponse(false, $message_error, null, 104);
+        }
+        $user = new User;
+        $user->phone = $request->phone;
+        $user->role = 3;
+        $user->sms_code = $this->getSmsCode();
+        $user->name = $request->name;
+        $user->password = bcrypt($request->password);
+        $user->save();
+        $user->plans()->sync($request->input('plans', []));
+
+        if ($user->save()) {
+            $CaptinCertificate = new CaptinCertificate();
+
+            foreach ($request->captin_certificates as $value) {
+                $CaptinCertificate->path = $value;
+                $CaptinCertificate->save();
+            }
+            $captin = new Captin();
+            $captin->cv = $request->cv;
+            $captin->identify = $request->identify;
+            $captin->hours_cost = $request->hours_cost;
+            $captin->cv = $request->cv;
+            $captin->save();
+
+
+        }
+
+
+        $message = 'Code : ' . $user->registration_code . ' is For Verification';
+        //  sendSMS($user->phone, $message);
+
+        $message = __('api.success');
+        return jsonResponse(true, $message, null, 200);
+
+
+    }
+
+    public function updateCaptinProfile(Request $request)
+    {
+
+        $user = Auth::guard('api')->user();
+        $captin = Captin::where('user_id')->first();
+
+        $validator = Validator::make($request->all(), [
+            'phone' => 'numeric|unique:users,phone,' . $user->id . ',id',
+
+        ]);
+
+
+        if ($validator->fails()) {
+            $message = getFirstMessageError($validator);
+            return jsonResponse(false, $message, null, 111, null, null, $validator);
+        }
+
+
+        if ($request->phone) {
+            $user->phone = $request->phone;
+        }
+        if ($request->name) {
+            $user->name = $request->name;
+        }
+        if ($request->avatar) {
+            $user->avatar = $request->avatar;
+        }
+        if ($request->address) {
+            $user->address = $request->address;
+        }
+        if ($request->bio) {
+            $captin->bio = $request->bio;
+        }
+        if ($request->hours_cost) {
+            $captin->hours_cost = $request->hours_cost;
+        }
+
+
+        $user->save();
+        $captin->save();
+
+
+        $message = __('api.success');
+        return jsonResponse(true, $message, $user, 200);
+
+
+    }
+
 }

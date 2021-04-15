@@ -41,10 +41,10 @@
             </div>
             <div class="form-group">
                 <label class="required" for="roles">{{ trans('cruds.user.fields.roles') }}</label>
-     {{--           <div style="padding-bottom: 4px">
-                    <span class="btn btn-info btn-xs select-all" style="border-radius: 0">{{ trans('global.select_all') }}</span>
-                    <span class="btn btn-info btn-xs deselect-all" style="border-radius: 0">{{ trans('global.deselect_all') }}</span>
-                </div>--}}
+                {{--           <div style="padding-bottom: 4px">
+                               <span class="btn btn-info btn-xs select-all" style="border-radius: 0">{{ trans('global.select_all') }}</span>
+                               <span class="btn btn-info btn-xs deselect-all" style="border-radius: 0">{{ trans('global.deselect_all') }}</span>
+                           </div>--}}
                 <select class="form-control  {{ $errors->has('roles') ? 'is-invalid' : '' }}" name="roles[]" id="roles"  required>
                     @foreach($roles as $id => $roles)
                         <option value="{{ $id }}" {{ in_array($id, old('roles', [])) ? 'selected' : '' }}>{{ $roles }}</option>
@@ -55,7 +55,25 @@
                         {{ $errors->first('roles') }}
                     </div>
                 @endif
-                <span class="help-block">{{ trans('cruds.user.fields.roles_helper') }}</span>
+                <span class="help-block">{{ trans('cruds.user.fields.roles.gender') }}</span>
+            </div>
+            <div class="form-group">
+                <label class="required" for="geb">{{ trans('cruds.user.fields.gender') }}</label>
+                {{--           <div style="padding-bottom: 4px">
+                               <span class="btn btn-info btn-xs select-all" style="border-radius: 0">{{ trans('global.select_all') }}</span>
+                               <span class="btn btn-info btn-xs deselect-all" style="border-radius: 0">{{ trans('global.deselect_all') }}</span>
+                           </div>--}}
+                <select data-placeholder="Gender" class="form-control  select2 {{ $errors->has('gender') ? 'is-invalid' : '' }}" name="gender" id="gender"  required>
+                    <option value="" ></option>
+                    <option value="0" >ذكر</option>
+                    <option value="1" >أنثى</option>
+                </select>
+                @if($errors->has('gender'))
+                    <div class="invalid-feedback">
+                        {{ $errors->first('gender') }}
+                    </div>
+                @endif
+                <span class="help-block">{{ trans('cruds.user.fields.gender_helper') }}</span>
             </div>
             <div class="form-group">
                 <label class="required" for="phone">{{ trans('cruds.user.fields.phone') }}</label>

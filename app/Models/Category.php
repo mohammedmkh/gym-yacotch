@@ -32,51 +32,55 @@ class Category extends Model
     }
 
 
-    protected $appends = ['name' , 'image_url'] ;
+    protected $appends = ['name', 'image_url'];
 
 
-    public function getImageUrlAttribute(){
+    public function getImageUrlAttribute()
+    {
 
 
-        if($this->image != ''){
-            return url('/').'/'.$this->image;
+        if ($this->image != '') {
+            return url('/') . '/' . $this->image;
         }
 
         return url('assets/media/image_large.png');
     }
 
-    public function getNameAttribute(){
+    public function getNameAttribute()
+    {
 
 
         $language = App::getLocale();
-        $language = Language::where('name' , $language)->first();
-        $language = $language->id ?? 1 ;
+        $language = Language::where('name', $language)->first();
+        $language = $language->id ?? 1;
 
-        $values = $this->translation($language)->first()->values ;
-        if( $values != ''){
-            $values = json_decode($values) ;
+        $values = $this->translation($language)->first()->values;
+        if ($values != '') {
+            $values = json_decode($values);
         }
         $name = $values->name ?? '';
-        return $name ;
+        return $name;
     }
 
 
-    public function getNameLang($language){
-        $values = $this->translation($language)->first()->values ;
-        if( $values != ''){
-            $values = json_decode($values) ;
+    public function getNameLang($language)
+    {
+        $values = $this->translation($language)->first()->values;
+        if ($values != '') {
+            $values = json_decode($values);
         }
         $name = $values->name ?? '';
-        return $name ;
+        return $name;
     }
 
     public function translation($language = null)
     {
-        if($language){
-            $language = Language::where('name' , $language)->first();
-            $language = $language->id ?? 1 ;
 
-            return $this->morphMany(Translation::class, 'transtable')->where('lang_id',  $language);
+        if ($language) {
+
+            $language = Language::where('name', $language)->first();
+            $language = $language->id ?? 1;
+            return $this->morphMany(Translation::class, 'transtable')->where('lang_id', $language);
         }
 
         return $this->morphMany(Translation::class, 'transtable');

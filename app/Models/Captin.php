@@ -2,9 +2,11 @@
 
 namespace App\Models;
 
+use App\CaptinPlan;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use \DateTimeInterface;
+use Illuminate\Support\Facades\App;
 
 class Captin extends Model
 {
@@ -28,6 +30,7 @@ class Captin extends Model
         'updated_at',
         'deleted_at',
     ];
+    protected $appends = ['name'];
 
     protected function serializeDate(DateTimeInterface $date)
     {
@@ -38,4 +41,17 @@ class Captin extends Model
     {
         return $this->belongsTo(User::class, 'user_id');
     }
+    public function getNameAttribute()
+    {
+
+         return $this->user->name;
+
+    }
+    public function CaptinPlan()
+    {
+        return $this->belongsToMany(CaptinPlan::class);
+    }
+
+
+
 }

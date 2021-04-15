@@ -29,10 +29,10 @@
                             {{ trans('cruds.translation.fields.lang') }}
                         </th>
                         <th>
-                            {{ trans('cruds.translation.fields.nametable') }}
+                            {{ trans('cruds.translation.fields.transtable_type') }}
                         </th>
                         <th>
-                            {{ trans('cruds.translation.fields.nametableid') }}
+                            {{ trans('cruds.translation.fields.transtable_id') }}
                         </th>
                         <th>
                             {{ trans('cruds.translation.fields.values') }}
@@ -55,10 +55,10 @@
                                 {{ $translation->lang->name ?? '' }}
                             </td>
                             <td>
-                                {{ $translation->nametable ?? '' }}
+                                {{ $translation->transtable_type ?? '' }}
                             </td>
                             <td>
-                                {{ $translation->nametableid ?? '' }}
+                                {{ $translation->transtable_id ?? '' }}
                             </td>
                             <td>
                                 {{ $translation->values ?? '' }}
@@ -142,7 +142,7 @@
       $($.fn.dataTable.tables(true)).DataTable()
           .columns.adjust();
   });
-  
+
 })
 
 </script>

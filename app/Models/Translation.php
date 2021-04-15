@@ -20,8 +20,8 @@ class Translation extends Model
 
     protected $fillable = [
         'lang_id',
-        'nametable',
-        'nametableid',
+        'transtable_type',
+        'transtable_id',
         'values',
         'created_at',
         'updated_at',

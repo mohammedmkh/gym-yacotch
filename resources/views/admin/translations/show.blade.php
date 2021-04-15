@@ -33,18 +33,18 @@
                     </tr>
                     <tr>
                         <th>
-                            {{ trans('cruds.translation.fields.nametable') }}
+                            {{ trans('cruds.translation.fields.transtable_type') }}
                         </th>
                         <td>
-                            {{ $translation->nametable }}
+                            {{ $translation->transtable_type }}
                         </td>
                     </tr>
                     <tr>
                         <th>
-                            {{ trans('cruds.translation.fields.nametableid') }}
+                            {{ trans('cruds.translation.fields.transtable_id') }}
                         </th>
                         <td>
-                            {{ $translation->nametableid }}
+                            {{ $translation->transtable_id }}
                         </td>
                     </tr>
                     <tr>

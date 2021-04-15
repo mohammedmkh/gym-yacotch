@@ -4,8 +4,8 @@ Route::get('/migrate', function () {
     ini_set('max_execution_time', 300);
     Artisan::call('migrate:fresh --seed');
     /*
-        Artisan::call('krlove:generate:model Devicetoken --table-name=devicetoken');
-        Artisan::call('krlove:generate:model LanguageDescription --table-name=language_description');
+        Artisan::call('krlove:generate:model CaptinQuotes --table-name=captin_quotes');
+        Artisan::call('krlove:generate:model CaptinPlan --table-name=captin_plans');
         Artisan::call('krlove:generate:model LanguageTables --table-name=table_languages');
         Artisan::call('krlove:generate:model captinCategorie --table-name=captin_categories');
         Artisan::call('krlove:generate:model Service --table-name=services');

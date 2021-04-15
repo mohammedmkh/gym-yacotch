@@ -10,8 +10,8 @@ class CreateTranslationsTable extends Migration
     {
         Schema::create('translations', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('nametable')->nullable();
-            $table->string('nametableid')->nullable();
+            $table->string('transtable_type')->nullable();
+            $table->string('transtable_id')->nullable();
             $table->string('values')->nullable();
             $table->timestamps();
             $table->softDeletes();

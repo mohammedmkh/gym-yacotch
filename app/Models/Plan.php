@@ -4,29 +4,36 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use \DateTimeInterface;
 
+/**
+ * @property integer $id
+ * @property string $name
+ * @property string $created_at
+ * @property string $updated_at
+ * @property string $deleted_at
+ * @property Course[] $courses
+ */
 class Plan extends Model
 {
     use SoftDeletes;
 
-    public $table = 'plans';
+    /**
+     * The "type" of the auto-incrementing ID.
+     *
+     * @var string
+     */
+    protected $keyType = 'integer';
 
-    protected $dates = [
-        'created_at',
-        'updated_at',
-        'deleted_at',
-    ];
+    /**
+     * @var array
+     */
+    protected $fillable = ['name', 'created_at', 'updated_at', 'deleted_at'];
 
-    protected $fillable = [
-        'name',
-        'created_at',
-        'updated_at',
-        'deleted_at',
-    ];
-
-    protected function serializeDate(DateTimeInterface $date)
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function courses()
     {
-        return $date->format('Y-m-d H:i:s');
+        return $this->hasMany('App\Course');
     }
 }

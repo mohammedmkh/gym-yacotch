@@ -7,6 +7,7 @@ use App\Http\Requests\MassDestroyCaptinRequest;
 use App\Http\Requests\StoreCaptinRequest;
 use App\Http\Requests\UpdateCaptinRequest;
 use App\Models\Captin;
+use App\Models\Category;
 use App\Models\User;
 use Gate;
 use Illuminate\Http\Request;

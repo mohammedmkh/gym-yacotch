@@ -24,24 +24,24 @@
                 <span class="help-block">{{ trans('cruds.translation.fields.lang_helper') }}</span>
             </div>
             <div class="form-group">
-                <label for="nametable">{{ trans('cruds.translation.fields.nametable') }}</label>
-                <input class="form-control {{ $errors->has('nametable') ? 'is-invalid' : '' }}" type="text" name="nametable" id="nametable" value="{{ old('nametable', '') }}">
-                @if($errors->has('nametable'))
+                <label for="transtable_type">{{ trans('cruds.translation.fields.transtable_type') }}</label>
+                <input class="form-control {{ $errors->has('transtable_type') ? 'is-invalid' : '' }}" type="text" name="transtable_type" id="transtable_type" value="{{ old('transtable_type', '') }}">
+                @if($errors->has('transtable_type'))
                     <div class="invalid-feedback">
-                        {{ $errors->first('nametable') }}
+                        {{ $errors->first('transtable_type') }}
                     </div>
                 @endif
-                <span class="help-block">{{ trans('cruds.translation.fields.nametable_helper') }}</span>
+                <span class="help-block">{{ trans('cruds.translation.fields.transtable_type_helper') }}</span>
             </div>
             <div class="form-group">
-                <label for="nametableid">{{ trans('cruds.translation.fields.nametableid') }}</label>
-                <input class="form-control {{ $errors->has('nametableid') ? 'is-invalid' : '' }}" type="text" name="nametableid" id="nametableid" value="{{ old('nametableid', '') }}">
-                @if($errors->has('nametableid'))
+                <label for="transtable_id">{{ trans('cruds.translation.fields.transtable_id') }}</label>
+                <input class="form-control {{ $errors->has('transtable_id') ? 'is-invalid' : '' }}" type="text" name="transtable_id" id="transtable_id" value="{{ old('transtable_id', '') }}">
+                @if($errors->has('transtable_id'))
                     <div class="invalid-feedback">
-                        {{ $errors->first('nametableid') }}
+                        {{ $errors->first('transtable_id') }}
                     </div>
                 @endif
-                <span class="help-block">{{ trans('cruds.translation.fields.nametableid_helper') }}</span>
+                <span class="help-block">{{ trans('cruds.translation.fields.transtable_id_helper') }}</span>
             </div>
             <div class="form-group">
                 <label for="values">{{ trans('cruds.translation.fields.values') }}</label>

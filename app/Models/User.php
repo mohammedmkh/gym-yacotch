@@ -2,6 +2,9 @@
 
 namespace App\Models;
 
+use App\captinCategorie;
+use App\CaptinPlan;
+use App\UserEvaluation;
 use Carbon\Carbon;
 use Hash;
 use Illuminate\Auth\Notifications\ResetPassword;
@@ -41,7 +44,8 @@ class User extends Authenticatable
         'updated_at',
         'deleted_at',
         'is_reset',
-        'verify'
+        'verify',
+        'address'
     ];
 
     protected function serializeDate(DateTimeInterface $date)
@@ -86,6 +90,22 @@ class User extends Authenticatable
     public function roles()
     {
         return $this->belongsToMany(Role::class);
+    }
+    public function categories()
+    {
+        return $this->belongsTo(Category::class,'category_id');
+    }
+    public function reviewsCaptin()
+    {
+        return $this->hasMany(ReviewsCaptin::class,'captin_id');
+    }
+    public function plans()
+    {
+        return $this->belongsToMany(Plan::class,'captin_plans');
+    }
+    public function Certificates()
+    {
+        return $this->hasMany(CaptinCertificate::class);
     }
 
 }

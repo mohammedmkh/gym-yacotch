@@ -73,7 +73,6 @@ class CategoriesController extends Controller
     {
 
         $data = $request->all();
-
         $validator = Validator::make($request->all(),
             [
                 'name.*' => 'bail|required',
@@ -103,14 +102,17 @@ class CategoriesController extends Controller
         $category->image = $data['image'] ;
         $category->save();
 
-
        foreach ($request->name as $key=>$name){
+
            $trans = new Translation();
            $d['name'] = $name ;
            $trans->values = json_encode(   $d );
            $trans->lang_id = $key;
+
            $trans->save();
+
            $category->translation()->save($trans);
+
        }
 
 

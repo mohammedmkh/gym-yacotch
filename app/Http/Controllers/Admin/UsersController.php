@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\MassDestroyUserRequest;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
+use App\Models\Category;
+use App\Models\Plan;
 use App\Models\Role;
 use App\Models\User;
 use Gate;
@@ -45,17 +47,25 @@ class UsersController extends Controller
         abort_if(Gate::denies('user_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         $roles = Role::all()->pluck('title', 'id');
+        $categories = Category::all()->pluck('name', 'id');
+        $plans = Plan::all()->pluck('name', 'id');
 
+        $user->load('categories');
         $user->load('roles');
+        $user->load('plans');
 
-        return view('admin.users.edit', compact('roles', 'user'));
+        return view('admin.users.edit', compact('roles', 'user', 'plans','categories'));
     }
 
     public function update(UpdateUserRequest $request, User $user)
     {
+
+
         $user->update($request->all());
         $user->roles()->sync($request->input('roles', []));
-
+        if ($request->has('plans')) {
+            $user->plans()->sync($request->input('plans', []));
+        }
         return redirect()->route('admin.users.index');
     }
 

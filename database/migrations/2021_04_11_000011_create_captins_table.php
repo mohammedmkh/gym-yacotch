@@ -11,7 +11,7 @@ class CreateCaptinsTable extends Migration
         Schema::create('captins', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('bio')->nullable();
-            $table->string('image')->nullable();
+            $table->string('identify')->nullable();
             $table->string('cv')->nullable();
             $table->string('hours_cost')->nullable();
             $table->timestamps();

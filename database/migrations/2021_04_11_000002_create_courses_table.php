@@ -14,7 +14,6 @@ class CreateCoursesTable extends Migration
             $table->string('hours')->nullable();
             $table->decimal('price', 15, 2)->nullable();
             $table->string('discount')->nullable();
-            $table->string('type_course')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
