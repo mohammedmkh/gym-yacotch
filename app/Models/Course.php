@@ -25,8 +25,6 @@ class Course extends Model
         'hours',
         'price',
         'discount',
-        'type_course',
-        'trainee_id',
         'created_at',
         'updated_at',
         'deleted_at',

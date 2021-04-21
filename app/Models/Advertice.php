@@ -18,17 +18,15 @@ class Advertice extends Model
         'deleted_at',
     ];
 
-    protected $fillable = [
-        'title',
-        'image',
-        'url',
-        'created_at',
-        'updated_at',
-        'deleted_at',
-    ];
+    protected $fillable = ['course_id', 'title', 'image', 'url', 'hour', 'people_no','price', 'time', 'status', 'created_at', 'updated_at', 'deleted_at'];
+
 
     protected function serializeDate(DateTimeInterface $date)
     {
         return $date->format('Y-m-d H:i:s');
+    }
+    public function course()
+    {
+        return $this->belongsTo(Course::class);
     }
 }
