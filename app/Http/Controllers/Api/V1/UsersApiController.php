@@ -497,7 +497,6 @@ class UsersApiController extends Controller
         return jsonResponse(true, $message, $data, 200);
     }
 
-
     public function getCategories(Request $request)
     {
 
@@ -618,7 +617,7 @@ class UsersApiController extends Controller
         $user->name = $request->name;
         $user->password = bcrypt($request->password);
         $user->save();
-        $user->plans()->sync($request->input('plans', []));
+       $user->plans()->sync($request->input('plans', []));
 
         if ($user->save()) {
             $CaptinCertificate = new CaptinCertificate();

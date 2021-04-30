@@ -24,6 +24,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        /*
         $languages = Language::all();
         view()->composer('*',function($view)
         use($languages) {
@@ -31,6 +32,6 @@ class AppServiceProvider extends ServiceProvider
             $view->with('languages', $languages);
 
 
-        });
+        }); */
     }
 }
