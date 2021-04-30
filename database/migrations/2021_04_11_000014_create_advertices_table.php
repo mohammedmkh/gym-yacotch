@@ -13,6 +13,11 @@ class CreateAdverticesTable extends Migration
             $table->string('title')->nullable();
             $table->string('image')->nullable();
             $table->string('url')->nullable();
+            $table->string('price')->nullable();
+            $table->string('hour')->nullable();
+            $table->string('people_no')->nullable();
+            $table->string('time')->nullable();
+            $table->boolean('status')->default(1);
             $table->timestamps();
             $table->softDeletes();
         });

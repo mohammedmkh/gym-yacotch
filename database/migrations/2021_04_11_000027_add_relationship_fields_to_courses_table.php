@@ -13,10 +13,6 @@ class AddRelationshipFieldsToCoursesTable extends Migration
             $table->foreign('captin_id', 'captin_fk_3643238')->references('id')->on('users');
             $table->unsignedBigInteger('plan_id')->nullable();
             $table->foreign('plan_id', 'plan_fk_3643240')->references('id')->on('plans');
-            $table->unsignedBigInteger('trainee_id')->nullable();
-            $table->foreign('trainee_id', 'trainee_fk_3643245')->references('id')->on('users');
-            $table->unsignedBigInteger('category_id')->nullable();
-            $table->foreign('category_id', 'category_fk_3643245')->references('id')->on('categories');
         });
     }
 }

@@ -31,4 +31,17 @@ class Quote extends Model
     {
         return $date->format('Y-m-d H:i:s');
     }
+
+    public function captinQuotes()
+    {
+        return $this->hasMany(CaptinQuote::class);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function quotePlans()
+    {
+        return $this->hasMany(QuotePlan::class);
+    }
 }

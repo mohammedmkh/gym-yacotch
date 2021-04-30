@@ -24,14 +24,16 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        /*
+
+
         $languages = Language::all();
-        view()->composer('*',function($view)
-        use($languages) {
+
+        $languages = Language::all();
+
+        view()->composer('*',function($view) use($languages) {
 
             $view->with('languages', $languages);
 
-
-        }); */
+         });
     }
 }

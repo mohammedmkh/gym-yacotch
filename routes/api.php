@@ -40,5 +40,16 @@ Route::group(['prefix' => 'v1', 'as' => 'api.', 'namespace' => 'Api\V1', 'middle
     /**************************************************************************** CAPTIN APP*/
 
     Route::post('updateCaptinProfile', 'UsersApiController@updateCaptinProfile');
+    Route::post('setCaptinVideo', 'UsersApiController@setCaptinVideo');
+    Route::post('setCaptinImages', 'UsersApiController@setCaptinImages');
+    Route::post('setCaptinCourse', 'UsersApiController@setCaptinCourse');
+    Route::post('updateCaptinCourse', 'UsersApiController@updateCaptinCourse');
+    Route::post('deleteCaptinCourse', 'UsersApiController@deleteCaptinCourse');
+    Route::post('setAdvertice', 'UsersApiController@setAdvertice');
+    Route::post('getAdverticeByCaptinId', 'UsersApiController@getAdverticeByCaptinId');
+    Route::post('setReport', 'UsersApiController@setReport');
+    Route::post('getCoursesByStatus', 'UsersApiController@getCoursesByStatus');
+    Route::get('getQuotePlan', 'UsersApiController@getQuotePlan');
+
 
 });

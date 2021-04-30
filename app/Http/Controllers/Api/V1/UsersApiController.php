@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api\V1;
 
+use App\Models\Advertice;
 use App\CaptinPlan;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreUserRequest;
@@ -11,10 +12,13 @@ use App\Models\Captin;
 use App\Models\CaptinCertificate;
 use App\Models\Category;
 use App\Models\Course;
+use App\Models\Image;
 use App\Models\Plan;
+use App\Models\Quote;
 use App\Models\User;
 use App\Models\CaptinVideo;
 
+use App\Models\Report;
 use App\UserEvaluation;
 use Gate;
 use Illuminate\Http\Request;
@@ -692,6 +696,226 @@ class UsersApiController extends Controller
         return jsonResponse(true, $message, $user, 200);
 
 
+    }
+
+    public function setCaptinVideo(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'path' => 'required',
+        ]);
+        if ($validator->fails()) {
+            $message = getFirstMessageError($validator);
+            return jsonResponse(false, $message, null, 111, null, null, $validator);
+        }
+        $data = $request->all();
+        $data['user_id'] = $user = Auth::guard('api')->user()->id;
+        $data = CaptinVideo::Create($data);
+        $message = __('api.success');
+        return jsonResponse(true, $message, $data, 200);
+    }
+
+    public function setCaptinImages(Request $request)
+    {
+
+
+        $validator = Validator::make($request->all(), [
+            'path' => 'required',
+        ]);
+        if ($validator->fails()) {
+            $message = getFirstMessageError($validator);
+            return jsonResponse(false, $message, null, 111, null, null, $validator);
+        }
+        $data = $request->all();
+
+        foreach ($data['path'] as $value) {
+
+            $data = Image::Create(['path' => $value, 'user_id' => Auth::guard('api')->user()->id]);
+
+        }
+        $message = __('api.success');
+        return jsonResponse(true, $message, null, 200);
+    }
+
+    public function setCaptinCourse(Request $request)
+    {
+
+
+        $validator = Validator::make($request->all(), [
+            'name' => 'required',
+            'hours' => 'required',
+            'price' => 'required',
+            'discount' => 'required',
+            'image' => 'required',
+        ]);
+        if ($validator->fails()) {
+            $message = getFirstMessageError($validator);
+            return jsonResponse(false, $message, null, 111, null, null, $validator);
+        }
+        $data['captin_id'] = Auth::guard('api')->user()->id;
+        $data = $request->all();
+
+
+        $data = Course::Create($data);
+
+
+        $message = __('api.success');
+        return jsonResponse(true, $message, null, 200);
+    }
+
+    public function updateCaptinCourse(Request $request)
+    {
+
+
+        $validator = Validator::make($request->all(), [
+
+            'couse_id' => 'required',
+        ]);
+        if ($validator->fails()) {
+            $message = getFirstMessageError($validator);
+            return jsonResponse(false, $message, null, 111, null, null, $validator);
+        }
+        $data['captin_id'] = Auth::guard('api')->user()->id;
+        $data = $request->all();
+
+        $data = Course::find($data['course_id'])->update($data);
+
+
+        $message = __('api.success');
+        return jsonResponse(true, $message, null, 200);
+    }
+
+    public function deleteCaptinCourse(Request $request)
+    {
+
+
+        $validator = Validator::make($request->all(), [
+            'course_id' => 'required',
+
+        ]);
+        if ($validator->fails()) {
+            $message = getFirstMessageError($validator);
+            return jsonResponse(false, $message, null, 111, null, null, $validator);
+        }
+        $data = $request->all();
+
+        $data = Course::find($data['course_id'])->delete();
+
+
+        $message = __('api.success');
+        return jsonResponse(true, $message, null, 200);
+    }
+
+    public function setAdvertice(Request $request)
+    {
+
+
+        $validator = Validator::make($request->all(), [
+            'title' => 'required',
+            'image' => 'required',
+            'url' => 'required',
+            'course_id' => 'required',
+        ]);
+        if ($validator->fails()) {
+            $message = getFirstMessageError($validator);
+            return jsonResponse(false, $message, null, 111, null, null, $validator);
+        }
+        $data = $request->all();
+
+
+        $data = Advertice::Create($data);
+
+
+        $message = __('api.success');
+        return jsonResponse(true, $message, $data, 200);
+    }
+
+    public function getAdverticeByCaptinId(Request $request)
+    {
+
+
+        $validator = Validator::make($request->all(), [
+            'captin_id' => 'required',
+        ]);
+        if ($validator->fails()) {
+            $message = getFirstMessageError($validator);
+            return jsonResponse(false, $message, null, 111, null, null, $validator);
+        }
+        $data = $request->all();
+
+
+        $data = Advertice::wherehas('course',function ($q) use ($request){
+            $q->where('captin_id',$request->captin_id);
+        })->get();
+
+
+        $message = __('api.success');
+        return jsonResponse(true, $message, $data, 200);
+    }
+
+    public function setReport(Request $request)
+    {
+
+
+        $validator = Validator::make($request->all(), [
+            'title' => 'required',
+            'subject' => 'required',
+            'detail' => 'required',
+            'type' => 'required',
+            'user_second_id' => 'required',
+            'user_first_id' => 'required',
+            'course_id' => 'required',
+        ]);
+        if ($validator->fails()) {
+            $message = getFirstMessageError($validator);
+            return jsonResponse(false, $message, null, 111, null, null, $validator);
+        }
+        $data = $request->all();
+
+
+        $data = Report::Create($data);
+
+
+        $message = __('api.success');
+        return jsonResponse(true, $message, $data, 200);
+    }
+
+    public function getCoursesByStatus(Request $request)
+    {
+
+
+        $validator = Validator::make($request->all(), [
+            'id' => 'required',
+            'status' => 'required',
+        ]);
+        if ($validator->fails()) {
+            $message = getFirstMessageError($validator);
+            return jsonResponse(false, $message, null, 111, null, null, $validator);
+        }
+        $data = $request->all();
+
+
+        $data['captin_id']=Auth::guard('api')->user()->id;
+
+        $data = Course::where($data)->get();
+
+
+        $message = __('api.success');
+        return jsonResponse(true, $message, $data, 200);
+    }
+
+    public function getQuotePlan(Request $request)
+    {
+
+
+
+
+        $data['captin_id']=Auth::guard('api')->user()->id;
+
+        $data = Quote::with('quotePlans')->get();
+
+
+        $message = __('api.success');
+        return jsonResponse(true, $message, $data, 200);
     }
 
 }
